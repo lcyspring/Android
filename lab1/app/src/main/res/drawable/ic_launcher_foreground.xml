@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 任务清单图标:白色卡片 + 对勾,位于自适应图标安全区内 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M34,30 h40 a4,4 0 0 1 4,4 v40 a4,4 0 0 1 -4,4 h-40 a4,4 0 0 1 -4,-4 v-40 a4,4 0 0 1 4,-4 z" />
+    <path
+        android:strokeColor="#3DDC84"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M40,45 h28 M40,55 h28 M40,65 h18" />
+    <path
+        android:strokeColor="#1B5E20"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M62,66 l6,6 l12,-14" />
+</vector>
