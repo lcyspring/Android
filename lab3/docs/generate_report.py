@@ -92,6 +92,21 @@ def shot_placeholder(doc, caption):
     style_run(p2.add_run(caption), cn='楷体', en='Times New Roman',
               size=9, color=RGBColor(0x77, 0x77, 0x77))
 
+SCREENSHOT_DIR = r'D:\rain_android\docs\screenshots'
+
+def shot_image(doc, filename, caption, width_cm=9):
+    """插入真实截图 + 居中标题。"""
+    path = os.path.join(SCREENSHOT_DIR, filename)
+    if os.path.exists(path):
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        run = p.add_run()
+        run.add_picture(path, width=Cm(width_cm))
+    p2 = doc.add_paragraph()
+    p2.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    style_run(p2.add_run(caption), cn='楷体', en='Times New Roman',
+              size=9, color=RGBColor(0x77, 0x77, 0x77))
+
 def table(doc, header, rows, widths=None):
     t = doc.add_table(rows=1 + len(rows), cols=len(header))
     t.style = 'Table Grid'   # 原生内置样式,无自定义底纹
@@ -483,11 +498,11 @@ code_lines(doc, '''class MainActivity : ComponentActivity() {
 h1(doc, '五、结果')
 body(doc, '构建:gradle assembleDebug 输出 BUILD SUCCESSFUL in 7s,产出 app/build/outputs/apk/debug/app-debug.apk。首次构建因 viewModelFactory DSL 报 Unresolved reference 失败,改用 ViewModelProvider.Factory 后第二次构建成功(详见第六节)。')
 body(doc, '运行截图(验收四态,改 MainActivity 的 App 参数后重新运行):', indent=False, bold=True)
-shot_placeholder(doc, '首页 Content 态:App() 默认,800ms Loading 后显示 100 条任务')
-shot_placeholder(doc, '首页 Loading 态:进入瞬间 isLoading=true,显示 CircularProgressIndicator')
-shot_placeholder(doc, '首页 Error 态:App(errorMode=true),显示错误图标 + 文案 + 重试按钮')
-shot_placeholder(doc, 'Error 态点重试:回到 Loading -> 再次 Error(不崩溃)')
-shot_placeholder(doc, '首页 Empty 态:App(emptyMode=true),显示收件箱图标 + 当前没有任务')
+shot_image(doc, 'shot_01_content.png', '图 1  首页 Content 态:App() 默认,800ms Loading 后显示 100 条任务')
+shot_image(doc, 'shot_02_loading.png', '图 2  首页 Loading 态:进入瞬间 isLoading=true,显示 CircularProgressIndicator')
+shot_image(doc, 'shot_03_error.png', '图 3  首页 Error 态:App(errorMode=true),显示错误图标 + 文案 + 重试按钮')
+shot_image(doc, 'shot_04_retry_error.png', '图 4  Error 态点重试:回到 Loading 后再次 Error(不崩溃)')
+shot_image(doc, 'shot_05_empty.png', '图 5  首页 Empty 态:App(emptyMode=true),显示收件箱图标 + 当前没有任务')
 body(doc, '验收点对照:', indent=False, bold=True)
 table(doc, ['验收点', '结果'], [
     ['Screen 不直接调 repository', 'HomeScreen 只接 uiState + onAction,repository 由 App 注入 HomeRoute/ViewModel'],
