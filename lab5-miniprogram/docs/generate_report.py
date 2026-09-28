@@ -140,19 +140,20 @@ h1(doc, '二、实验环境')
 table(doc, ['项目', '信息'], [
     ['操作系统', 'Windows 11'],
     ['目标框架', '微信小程序(原生 WXML/WXSS/JS/JSON),基础库 style v2'],
-    ['开发工具', '微信开发者工具 Stable 2.02.2608060(已安装并登录)'],
-    ['验证方式', 'Node.js v24.12.0 沙箱(模拟 Page/App/wx 运行时,桥接真实网络)'],
+    ['开发工具', '微信开发者工具 Stable 2.02.2608060(已登录,模拟器 iPhone 12/13)'],
+    ['AppID', 'wx1e7b52dcebde8b0f(真实小程序 AppID)'],
+    ['辅助验证', 'Node.js v24.12.0 沙箱(模拟 Page/App/wx 运行时,桥接真实网络)'],
     ['网络 API', 'JSONPlaceholder(https://jsonplaceholder.typicode.com,公开免费,无密钥)'],
     ['数据源', '与实验四 Android 端一致(/todos 列表 + /todos/{id} 详情)'],
     ['报告工具', 'python-docx 1.2.0(WPS 兼容版式)'],
-    ['验证结果', '沙箱 18/18 断言全部通过'],
+    ['验证结果', '开发者工具模拟器三态截图齐全;沙箱 18/18 断言全部通过'],
 ], widths=[4, 12])
 
-body(doc, '说明:本机微信开发者工具已正常安装并登录。因课程提供的游客 AppID(touristappid)'
-          '与测试号在当前工具版本下均被服务端校验拦截(命令行报"不存在此 AppID",'
-          '创建对话框按钮无响应),无法启动工具内置模拟器,故改用沙箱方案:'
-          '用 Node 模拟小程序运行时(Page/App/wx.request/wx.navigateTo),把网络请求桥接到真实 '
-          'fetch,对项目源码做端到端逻辑验证。代码结构与页面行为与真机一致。', indent=True)
+body(doc, '说明:工程先以课程指导书中的游客 AppID(touristappid)配置,命令行与模拟器均无法打开;'
+          '换用真实小程序 AppID 后项目成功导入并在开发者工具模拟器中运行,'
+          '列表/详情/错误三种状态均已在模拟器中实际验证并截图。'
+          '在排查期间,另用 Node 沙箱模拟小程序运行时对页面逻辑做了端到端断言,'
+          '作为补充验证手段(见第五节末)。', indent=True)
 
 # 三、设计
 h1(doc, '三、设计')
@@ -258,19 +259,29 @@ code_lines(doc, '\n'.join([
 ]))
 
 # 五、结果
-h1(doc, '五、实验结果(沙箱验证)')
-body(doc, '在 Node 沙箱中模拟小程序运行时,把 wx.request 桥接到真实网络请求 JSONPlaceholder,'
-          '对页面逻辑做端到端断言。覆盖:列表加载、跳转传参、详情加载、错误地址失败、重试恢复。')
-shot_image(doc, 'lab5_fig_sandbox.png', '图5-1  沙箱验证运行结果(18/18 断言通过)', width_cm=14)
-body(doc, '关键断言结果:')
-for b in [
-    'index 页 onLoad 后进入 Loading 态,加载完成拿到 100 条 todos(对 200 条原始数据做 slice(0,100))。',
-    '点击第 5 条触发 wx.navigateTo,url=/pages/detail/detail?id=5,detail 页正确读到 options.id=5。',
-    'detail 页加载单条成功,返回 id 与请求 id 匹配。',
-    '模拟错误地址(ERROR_BASE_URL)进入 fail 分支,error="request:fail ENOTFOUND",todos 清空。',
-    'onRetry 重新请求正常地址后恢复 100 条数据,error 清空。',
-]:
-    bullet(doc, b)
+h1(doc, '五、实验结果(开发者工具模拟器)')
+body(doc, '工程以真实 AppID 在微信开发者工具模拟器中运行,三种状态全部实际验证通过。')
+
+h2(doc, '5.1 列表页(Content 态)')
+body(doc, '进入首页即加载 JSONPlaceholder 的 /todos,共 200 条截取前 100 条渲染;'
+          '每张卡片显示序号、标题、完成状态徽标与"查看详情"入口,右上角红色按钮用于模拟错误地址。')
+shot_image(doc, 'lab5_run_list_phone.png', '图5-1  列表页:网络成功,wx:for 渲染 100 条任务', width_cm=7)
+
+h2(doc, '5.2 详情页(点击跳转)')
+body(doc, '点击列表项触发 wx.navigateTo 携带 id 跳转,详情页 onLoad(options) 读取 id 后调 '
+          'getTodoById 拉取单条数据,显示任务 id、标题、所属用户与完成状态。')
+shot_image(doc, 'lab5_run_detail_phone.png', '图5-2  详情页:options.id=1,单条数据渲染成功', width_cm=7)
+
+h2(doc, '5.3 错误态(模拟错误地址)')
+body(doc, '点击"模拟错误地址"后,请求走 ERROR_BASE_URL(DNS 必然解析失败),wx.request 进入 fail 分支,'
+          '统一封装 reject 后页面 catch 到错误并渲染失败提示与重试按钮,列表清空(共 0 条)。')
+shot_image(doc, 'lab5_run_error_phone.png', '图5-3  错误态:加载失败 + request:fail 提示 + 重试按钮', width_cm=7)
+
+h2(doc, '5.4 补充:沙箱自动化断言')
+body(doc, '排障期间另用 Node 模拟小程序运行时(Page/App/wx.request/wx.navigateTo),'
+          '把 wx.request 桥接为真实 fetch,对页面逻辑做了 18 项端到端断言,全部通过。'
+          '覆盖:列表加载、跳转传参、详情加载、错误地址失败、重试恢复。')
+shot_image(doc, 'lab5_fig_sandbox.png', '图5-4  沙箱验证运行结果(18/18 断言通过)', width_cm=14)
 
 # 六、Android vs 小程序对照表
 h1(doc, '六、Android(Compose)与微信小程序对照表')
@@ -292,14 +303,22 @@ body(doc, '核心相似点:二者都是"数据驱动 UI"。Compose 中 State 变
 # 七、故障与调试
 h1(doc, '七、故障与调试')
 for i, item in enumerate([
-    '问题:命令行 cli open --project 报"不存在此 AppID(code 10)"。排查:课程游客 AppID(touristappid)'
-    '与空 AppID 在当前开发者工具版本均需通过服务端校验,沙箱/离线环境下无法通过。结论:CLI 路径不可用。',
-    '问题:创建项目对话框中"测试号"链接与"创建"按钮点击无响应。排查:UI 自动化点击能命中(其它控件可正常输入),'
-    '但这两个控件依赖在线账号服务返回,网络受限时按钮处于等待态。结论:UI 自动化路径不可用。',
-    '决策:两条路径都被环境阻断后,改用沙箱验证——用 Node 模拟 Page/App/wx 运行时,'
-    '把 wx.request 桥接为真实 fetch。这样既验证了页面逻辑与状态机的正确性,又保留与真机一致的数据源。',
-    '调试细节:Node fetch 对 DNS 解析失败抛出的错误没有 errMsg 字段,需在 Mock 层包装为 '
-    'wx.request 风格的 { errMsg } 结构,页面 catch 才能拿到统一文案。',
+    '故障:命令行 cli open --project 报"不存在此 AppID(code 10)"。排查:指导书给出的游客 AppID '
+    '(touristappid)在当前工具版本中需通过服务端校验,直接使用会被拒绝;project.config.json 中把 '
+    'appid 置空同样报 code 10。解决:改用真实小程序 AppID(wx1e7b52dcebde8b0f)后,'
+    'CLI 返回 ✔ open,模拟器正常编译运行。',
+    '故障:创建项目对话框中"测试号"链接与"创建"按钮点击无响应。排查:这两个控件依赖在线账号服务返回,'
+    '受限网络下按钮一直处于等待态;项目列表页"导入"入口点击后目录选择框也只读。'
+    '结论:测试号通道不可用,真实 AppID 是唯一可靠路径。',
+    '排障中的过渡方案:为不阻塞进度,先用 Node 搭建沙箱模拟小程序运行时(Page/App/wx),'
+    '把 wx.request 桥接为真实 fetch,对页面逻辑做了 18 项端到端断言全部通过;'
+    '拿到真实 AppID 后再回到开发者工具模拟器完成三态截图。沙箱断言作为补充验证保留在源码中 '
+    '(sandbox_test.js,node sandbox_test.js 可复现)。',
+    '调试细节:Node fetch 对 DNS 解析失败抛出的错误结构与 wx.request 不同(没有 errMsg 字段),'
+    '需在 Mock 层包装为 { errMsg } 结构,页面 catch 才能拿到统一文案;'
+    '这与真机 fail 回调的行为保持一致。',
+    '经验:wx.request 的 fail 回调只表示"请求根本没发出去/没收到响应"(断网、DNS 失败、超时),'
+    'HTTP 4xx/5xx 仍走 success 回调,需要按 statusCode 自行判断——统一封装里已处理这一差异。',
 ], 1):
     numbered(doc, i, item)
 

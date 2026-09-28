@@ -2,8 +2,12 @@
   "description": "《移动应用开发》实验五:微信小程序开发(列表+详情+统一request封装)",
   "packOptions": {
     "ignore": [
-      { "type": "folder", "value": "node_modules" }
-    ]
+      {
+        "value": "node_modules",
+        "type": "folder"
+      }
+    ],
+    "include": []
   },
   "setting": {
     "urlCheck": false,
@@ -17,15 +21,27 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    }
+    },
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false
   },
   "compileType": "miniprogram",
   "libVersion": "latest",
-  "appid": "touristappid",
+  "appid": "wx1e7b52dcebde8b0f",
   "projectname": "lab5-miniprogram",
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  }
+  },
+  "simulatorPluginLibVersion": {}
 }
