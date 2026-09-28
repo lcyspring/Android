@@ -1,0 +1,46 @@
+<!--pages/detail/detail.wxml-->
+<!--步骤 32:读取 onLoad 中 options.id 请求并显示单条任务-->
+<view class="container">
+
+  <!-- Loading -->
+  <view class="state" wx:if="{{isLoading}}">
+    <view class="state__spinner"></view>
+    <text class="state__hint">正在加载任务 #{{id}}…</text>
+  </view>
+
+  <!-- Error -->
+  <view class="state" wx:elif="{{error}}">
+    <text class="state__icon">⚠️</text>
+    <text class="state__title">加载失败</text>
+    <text class="state__hint state__hint--break">{{error}}</text>
+    <button class="btn-primary state__retry" bindtap="onRetry">重试</button>
+  </view>
+
+  <!-- Content -->
+  <view class="card detail" wx:elif="{{todo}}">
+    <view class="detail__head">
+      <text class="detail__id">任务 #{{todo.id}}</text>
+      <text class="detail__badge {{todo.completed ? 'detail__badge--done' : 'detail__badge--doing'}}">
+        {{todo.completed ? '已完成' : '未完成'}}
+      </text>
+    </view>
+
+    <view class="detail__row">
+      <text class="detail__label">标题</text>
+      <text class="detail__value">{{todo.title}}</text>
+    </view>
+
+    <view class="detail__row">
+      <text class="detail__label">所属用户</text>
+      <text class="detail__value">user #{{todo.userId}}</text>
+    </view>
+
+    <view class="detail__row">
+      <text class="detail__label">完成状态</text>
+      <text class="detail__value">{{todo.completed ? '已完成(completed = true)' : '未完成(completed = false)'}}</text>
+    </view>
+  </view>
+
+  <button class="btn-primary detail__back" bindtap="onBack">返回列表</button>
+
+</view>
