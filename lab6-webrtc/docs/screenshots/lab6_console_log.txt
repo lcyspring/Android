@@ -1,0 +1,18 @@
+[步骤38] 点击通话按钮，呼叫 GSgpV4-aAOIshhxgAAAD
+[StartCall] 开始呼叫 GSgpV4-aAOIshhxgAAAD，createOffer=true
+[步骤38-1] onnegotiationneeded 触发，开始 createOffer
+[步骤38-2] Offer 已通过信令服务器发送给 GSgpV4-aAOIshhxgAAAD
+[步骤39-ICE] onicecandidate 触发，候选地址: candidate:185466507 1 udp 2122260223 192.168.141.1 60560 typ host
+[步骤39-ICE] onicecandidate 触发，候选地址: candidate:3416592347 1 udp 2122194687 192.168.23.1 60561 typ host
+[步骤39-ICE] onicecandidate 触发，候选地址: candidate:910218805 1 udp 2122129151 172.22.151.67 60562 typ host
+[步骤39-ICE] onicecandidate 触发，候选地址: candidate:185466507 1 udp 2122260223 192.168.141.1 60563 typ host
+[步骤39-ICE] onicecandidate 触发，候选地址: candidate:3416592347 1 udp 2122194687 192.168.23.1 60564 typ host
+[步骤39-ICE] onicecandidate 触发，候选地址: candidate:910218805 1 udp 2122129151 172.22.151.67 60565 typ host
+[步骤38-SDP] 收到 answer 来自 GSgpV4-aAOIshhxgAAAD
+[步骤38-SDP] 已设置 RemoteDescription(answer)
+[步骤40-ICE状态] GSgpV4-aAOIshhxgAAAD: checking
+[步骤39-ICE] 收到远端 candidate 来自 GSgpV4-aAOIshhxgAAAD
+[步骤39-TRACK] ontrack 触发，收到远端媒体流，track kind=audio，streams=1
+[步骤39-TRACK] ontrack 触发，收到远端媒体流，track kind=video，streams=1
+[步骤40-ICE状态] GSgpV4-aAOIshhxgAAAD: connected
+[步骤39-ICE] onicecandidate 触发，candidate 为 null —— 本轮 ICE 协商结束
