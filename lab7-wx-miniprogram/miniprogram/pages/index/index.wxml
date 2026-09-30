@@ -1,0 +1,38 @@
+<view class="header-box">
+	<view class="nav-container">
+		<text bindtap="toPublish">报修申报</text>
+		<text bindtap="toAdmin">管理员入口</text>
+	</view>
+
+	<view>
+		<van-picker columns="{{ floorList }}" bind:change="selectFloor" visible-item-count="3" />
+	</view>
+
+	<view class="header-tab">
+		<ye-tab tab-list="{{tabList}}" font-size="32rpx" lrPadding="100rpx" bind:select="selectStatus"></ye-tab>
+	</view>
+</view>
+
+<block wx:for="{{applyData}}" wx:key="applyData">
+	<view class="card-item">
+		<view class="item-content border-bottom">
+			<view class="left-box">
+				<image src="{{item.levelIcon}}" mode="aspectFill"></image>
+			</view>
+			<view class="right-box">
+				<text class="floor">{{item.location}} {{item.floor}}栋{{item.dorm}}</text>
+				<view class="tag-row">
+					<van-tag plain type="primary">{{item.faultType}}</van-tag>
+					<van-tag color="{{item.status === '未处理' ? '#ff976a' : '#07c160'}}">{{item.status}}</van-tag>
+				</view>
+				<text class="desc">{{item.desc}}</text>
+				<text class="date">{{item.createTime}}</text>
+			</view>
+		</view>
+		<view class="item-footer">
+			<text data-id="{{item._id}}" bindtap="navDetail">查看详情</text>
+		</view>
+		<view class="level-tag" style="background-color: {{ item.level === '普通维修' ? '#07c160' : '#ee0a24'}}">
+			{{item.level}}</view>
+	</view>
+</block>

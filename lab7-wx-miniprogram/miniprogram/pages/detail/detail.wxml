@@ -1,0 +1,51 @@
+<view class='apply-table'>
+	<view class='apply-title'>申报表</view>
+	<view class="apply-item">
+		<view class="apply-item-title">申报人：</view>
+		<view class="item-content">{{data.name}}</view>
+	</view>
+	<view class="apply-item">
+		<view class="apply-item-title">报修位置：</view>
+		<view class="item-content">{{data.location}}</view>
+	</view>
+	<view class="apply-item">
+		<view class="apply-item-title">楼栋房号：</view>
+		<view class="item-content">{{data.floor}}栋{{data.dorm}}</view>
+	</view>
+	<view class="apply-item">
+		<view class="apply-item-title">故障类型：</view>
+		<view class="item-content">{{data.faultType}}</view>
+	</view>
+	<view class="apply-item" wx:if="{{admin}}">
+		<view class="apply-item-title">联系电话：</view>
+		<view class="item-content">{{data.phone}}</view>
+		<view class="contact-phone-footer">
+			<text data-phone="{{data.phone}}" bindtap="callApplyPhone">一键联系</text>
+			<text data-phone="{{data.phone}}" bindtap="copyApplyPhone">一键复制</text>
+		</view>
+	</view>
+	<view class="apply-item">
+		<view class="apply-item-title">申报描述：</view>
+		<view class="item-content">{{data.desc}}</view>
+	</view>
+	<view class="apply-item" wx:if="{{data.images.length}}">
+		<view class="apply-item-title">现场图片：</view>
+		<view class="image-list">
+			<image wx:for="{{data.images}}" wx:key="*this" src="{{item}}" mode="aspectFill"
+				class="preview-img" data-url="{{item}}" data-urls="{{data.images}}" bindtap="previewImage" />
+		</view>
+	</view>
+	<view class="apply-item">
+		<view class="apply-item-title">申报级别：</view>
+		<view class="item-content">{{data.level}}</view>
+	</view>
+	<view class="apply-item">
+		<view class="apply-item-title">申报状态：</view>
+		<view class="item-content">{{data.status}}</view>
+	</view>
+	<view class="apply-item">
+		<view class="apply-item-title">申报日期：</view>
+		<view class="item-content">{{data.createTime}}</view>
+	</view>
+	<image src='/images/bi.png' class="header-icon"></image>
+</view>

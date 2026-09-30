@@ -1,0 +1,27 @@
+@import './card.wxss';
+
+.header-box {
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+}
+
+.nav-container {
+  padding: 20rpx;
+  background-color: var(--color-white);
+  color: var(--color-btn-info);
+  display: flex;
+  justify-content: space-between;
+  font-size: 32rpx;
+}
+
+.header-tab {
+  padding: 10rpx 0;
+  background-color: var(--color-white);
+}
+
+.tag-row {
+  display: flex;
+  gap: 10rpx;
+  margin: 6rpx 0;
+}

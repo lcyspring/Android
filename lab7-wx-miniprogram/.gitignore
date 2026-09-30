@@ -1,0 +1,5 @@
+﻿.idea/
+node_modules/
+miniprogram_npm/
+*.log
+.DS_Store
