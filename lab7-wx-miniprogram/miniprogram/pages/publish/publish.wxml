@@ -1,0 +1,85 @@
+<!-- 通告栏 -->
+<view class="notice-container">
+	<van-notice-bar left-icon="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png"
+		text="请如实填写信息，方便维修人员对应进行维修。可上传现场照片，加速问题定位。" speed="40" />
+</view>
+
+<!-- 申报人 -->
+<view class="apply-item">
+	<text>申报人：</text>
+	<input class="in-1" maxlength="5" bindinput="setName" placeholder="姓名" />
+</view>
+
+<!-- 报修位置 -->
+<view class="apply-item">
+	<text>报修位置：</text>
+	<picker bindchange="selectLocation" range="{{locations}}">
+		<view class="picker">
+			<input class="in-1" type="text" value="{{location}}" placeholder="请选择" disabled />
+		</view>
+	</picker>
+</view>
+
+<!-- 申报宿舍 -->
+<view class="apply-item">
+	<text>楼栋房号：</text>
+	<picker bindchange="selectFloor" range="{{pickerList}}">
+		<view class="picker">
+			<input class="in-2" type="number" value="{{floor}}" placeholder="栋" />
+		</view>
+	</picker>
+	<text class="text-dorm">栋</text>
+	<input class="in-3" type="number" maxlength="6" bindinput="setDormNum" placeholder="房间号" />
+</view>
+
+<!-- 故障类型 -->
+<view class="apply-item">
+	<text>故障类型：</text>
+	<picker bindchange="selectFaultType" range="{{faultTypes}}">
+		<view class="picker">
+			<input class="in-1" type="text" value="{{faultType}}" placeholder="请选择" disabled />
+		</view>
+	</picker>
+</view>
+
+<!-- 联系电话 -->
+<view class="apply-item">
+	<text>联系电话：</text>
+	<input class="in-4" type="number" maxlength="11" bindinput="setPhone" placeholder="手机号" />
+</view>
+
+<!-- 申报描述 -->
+<view class="apply-item apply-desc">
+	<text>申报描述：</text>
+	<textarea class="in-5" placeholder="请说明要维修的情况" placeholder-style="color:#ccc;font-size:14px;"
+		maxlength="50" bindinput="setDesc" />
+</view>
+
+<!-- 图片上传 -->
+<view class="apply-item apply-images">
+	<text>现场图片（{{imageList.length}}/{{maxImageCount}}）：</text>
+	<view class="image-grid">
+		<view class="image-item" wx:for="{{imageList}}" wx:key="*this">
+			<image src="{{item}}" mode="aspectFill" data-url="{{item}}" bindtap="previewImage" />
+			<view class="image-del" data-index="{{index}}" catchtap="deleteImage">×</view>
+		</view>
+		<view class="image-add" wx:if="{{imageList.length < maxImageCount}}" bindtap="chooseImage">+</view>
+	</view>
+</view>
+
+<!-- 维修级别 -->
+<van-radio-group value="{{ level }}" bind:change="selectLevel">
+	<van-cell-group border="{{false}}">
+		<van-cell title="普通维修" clickable data-level="普通维修" bind:click="clickLevel" border="{{false}}">
+			<van-radio slot="right-icon" name="普通维修" />
+		</van-cell>
+		<van-cell title="紧急维修" clickable data-level="紧急维修" bind:click="clickLevel" border="{{false}}">
+			<van-radio slot="right-icon" name="紧急维修" />
+		</van-cell>
+	</van-cell-group>
+</van-radio-group>
+
+<!-- 提交申报 -->
+<view class="apply-btn">
+	<button type="primary" bindtap="inApplyData">提交</button>
+</view>

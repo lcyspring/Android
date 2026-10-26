@@ -1,0 +1,5 @@
+{"_id":"cbddf0af60fa6f4d18dd4e6c4479852c","role":"超级管理员","openid":"opAO55Z7hvJJnkTn7W4rdRsaoVu0","name":"李春雨","phone":"13800138001","account":"admin","password":"123456","floor":1,"dorm":"305"}
+{"_id":"seed_role_worker1","role":"维修人员","openid":"","name":"罗钢","phone":"17726131718","account":"luogang","password":"123456","floor":null,"dorm":""}
+{"_id":"seed_role_worker2","role":"维修人员","openid":"","name":"贺强","phone":"13327228777","account":"heshifu","password":"123456","floor":null,"dorm":""}
+{"_id":"seed_role_wlx","role":"普通用户","openid":"","name":"李文鑫","phone":"13800138002","account":"wlx","password":"123456","floor":2,"dorm":"104"}
+{"_id":"seed_role_pyk","role":"普通用户","openid":"","name":"裴杨坤","phone":"13800138003","account":"pyk","password":"123456","floor":3,"dorm":"108"}

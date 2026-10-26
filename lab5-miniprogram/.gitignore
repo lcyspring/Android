@@ -1,0 +1,9 @@
+# 微信开发者工具生成
+project.private.config.json
+miniprogram_npm/
+node_modules/
+package-lock.json
+
+# 系统
+.DS_Store
+Thumbs.db

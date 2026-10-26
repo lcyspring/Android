@@ -1,0 +1,55 @@
+<!--pages/index/index.wxml-->
+<!--步骤 29:用 wx:for 显示列表;loading/error/empty/content 四态与 Android 实验三/四一致-->
+<view class="container">
+
+  <!-- 顶部操作条:错误模拟入口(步骤 33) -->
+  <view class="toolbar">
+    <text class="toolbar__title">共 {{todos.length}} 条</text>
+    <button class="btn-danger toolbar__btn" size="mini" bindtap="onSimulateError">模拟错误地址</button>
+  </view>
+
+  <!-- 状态 1:Loading -->
+  <view class="state" wx:if="{{isLoading}}">
+    <view class="state__spinner"></view>
+    <text class="state__hint">正在加载任务…</text>
+  </view>
+
+  <!-- 状态 2:Error(步骤 33 模拟错误地址后展示,带重试) -->
+  <view class="state" wx:elif="{{error}}">
+    <text class="state__icon">⚠️</text>
+    <text class="state__title">加载失败</text>
+    <text class="state__hint state__hint--break">{{error}}</text>
+    <button class="btn-primary state__retry" bindtap="onRetry">重试</button>
+  </view>
+
+  <!-- 状态 3:Empty -->
+  <view class="state" wx:elif="{{todos.length === 0}}">
+    <text class="state__icon">📭</text>
+    <text class="state__title">当前没有任务</text>
+    <button class="btn-primary state__retry" bindtap="onRetry">点这里重试</button>
+  </view>
+
+  <!-- 状态 4:Content —— 步骤 29 wx:for 列表 -->
+  <block wx:else>
+    <view
+      class="card todo"
+      wx:for="{{todos}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onTapItem"
+      hover-class="todo--hover"
+    >
+      <view class="todo__head">
+        <text class="todo__id">#{{item.id}}</text>
+        <text class="todo__badge {{item.completed ? 'todo__badge--done' : 'todo__badge--doing'}}">
+          {{item.completed ? '已完成' : '未完成'}}
+        </text>
+      </view>
+      <text class="todo__title">{{item.title}}</text>
+      <view class="todo__foot">
+        <text class="todo__go">查看详情 ›</text>
+      </view>
+    </view>
+  </block>
+
+</view>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Compose 应用主用 Material3 主题,这里只是启动 Theme,真正的颜色在 MainActivity 中用 MaterialTheme 设置 -->
+    <style name="Theme.Lab2Compose" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

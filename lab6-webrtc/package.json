@@ -1,0 +1,13 @@
+{
+  "name": "lab6-webrtc",
+  "version": "1.0.0",
+  "description": "实验六 WebRTC 实时通信（原生 + Socket.io 信令服务器）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^3.0.4"
+  }
+}

@@ -1,0 +1,27 @@
+<view class="repair-page">
+	<view class="section">
+		<view class="section-title">报修信息</view>
+		<view class="info-row">楼栋房号：{{data.floor}}栋{{data.dorm}}</view>
+		<view class="info-row">报修人：{{data.name}}</view>
+		<view class="info-row">故障类型：{{data.faultType}}</view>
+		<view class="info-row">故障描述：{{data.desc}}</view>
+	</view>
+
+	<view class="section">
+		<view class="section-title">维修情况</view>
+		<textarea class="textarea" value="{{content}}" placeholder="请填写维修过程与结果" maxlength="200"
+			bindinput="setContent" />
+		<view class="image-list">
+			<view class="image-item" wx:for="{{imageList}}" wx:key="*this">
+				<image src="{{item}}" mode="aspectFill" data-url="{{item}}" bindtap="previewImage" />
+				<view class="image-del" data-index="{{index}}" bindtap="deleteImage">×</view>
+			</view>
+			<view class="image-add" wx:if="{{imageList.length < maxImageCount}}" bindtap="chooseImage">+</view>
+		</view>
+	</view>
+
+	<view class="footer">
+		<button class="btn ghost" bindtap="saveOnly" disabled="{{submitting}}">仅保存记录</button>
+		<button class="btn primary" bindtap="submitAndComplete" disabled="{{submitting}}">提交并完成</button>
+	</view>
+</view>
