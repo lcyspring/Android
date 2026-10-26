@@ -73,3 +73,33 @@ page {
   height: 200rpx;
   border-radius: 8rpx;
 }
+
+/* 不受理原因 */
+.reject-content {
+  color: var(--color-btn-danger);
+  font-weight: bold;
+}
+
+/* 维修记录 */
+.record-item {
+  display: flex;
+  flex-direction: column;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.06);
+  color: var(--color-black);
+}
+
+.record-item:last-child {
+  border-bottom: none;
+}
+
+.record-content {
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+.record-time {
+  font-size: 24rpx;
+  color: var(--color-text-second);
+  margin-top: 6rpx;
+}

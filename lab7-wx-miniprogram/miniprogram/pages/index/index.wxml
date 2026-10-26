@@ -1,38 +1,46 @@
 <view class="header-box">
 	<view class="nav-container">
 		<text bindtap="toPublish">报修申报</text>
-		<text bindtap="toAdmin">管理员入口</text>
+		<text wx:if="{{isAdmin}}" bindtap="toAdmin">管理员入口</text>
 	</view>
 
-	<view>
+	<view class="user-bar">
+		<text class="user-name">你好，{{userInfo.name}}（{{userInfo.role}}{{userInfo.dorm ? ' · ' + userInfo.floor + '栋' + userInfo.dorm : ''}}）</text>
+		<text class="user-action" bindtap="logout">退出登录</text>
+	</view>
+
+	<view wx:if="{{isAdmin}}">
 		<van-picker columns="{{ floorList }}" bind:change="selectFloor" visible-item-count="3" />
 	</view>
 
 	<view class="header-tab">
-		<ye-tab tab-list="{{tabList}}" font-size="32rpx" lrPadding="100rpx" bind:select="selectStatus"></ye-tab>
+		<ye-tab tab-list="{{tabList}}" font-size="28rpx" lrPadding="40rpx" bind:select="selectStatus"></ye-tab>
 	</view>
 </view>
 
-<block wx:for="{{applyData}}" wx:key="applyData">
+<block wx:for="{{applyData}}" wx:key="_id">
 	<view class="card-item">
 		<view class="item-content border-bottom">
 			<view class="left-box">
 				<image src="{{item.levelIcon}}" mode="aspectFill"></image>
 			</view>
 			<view class="right-box">
-				<text class="floor">{{item.location}} {{item.floor}}栋{{item.dorm}}</text>
-				<view class="tag-row">
-					<van-tag plain type="primary">{{item.faultType}}</van-tag>
-					<van-tag color="{{item.status === '未处理' ? '#ff976a' : '#07c160'}}">{{item.status}}</van-tag>
-				</view>
+				<text class="floor">{{item.floor}}栋{{item.dorm}}</text>
 				<text class="desc">{{item.desc}}</text>
+				<van-tag color="{{item.statusColor}}">{{item.status}}</van-tag>
 				<text class="date">{{item.createTime}}</text>
 			</view>
 		</view>
 		<view class="item-footer">
 			<text data-id="{{item._id}}" bindtap="navDetail">查看详情</text>
+			<text class="confirm-text-btn" data-id="{{item._id}}" wx:if="{{isWorker && item.status === '已确认'}}"
+				bindtap="toRepair">上传维修情况</text>
 		</view>
 		<view class="level-tag" style="background-color: {{ item.level === '普通维修' ? '#07c160' : '#ee0a24'}}">
 			{{item.level}}</view>
 	</view>
 </block>
+
+<view class="empty-tip" wx:if="{{applyData.length === 0}}">
+	<text>{{isAdmin ? '暂无报修记录' : (isWorker ? '暂无指派给你的维修任务' : '你的宿舍暂无报修记录')}}</text>
+</view>

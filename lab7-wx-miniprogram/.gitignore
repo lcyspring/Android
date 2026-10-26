@@ -1,5 +1,21 @@
-﻿.idea/
+# IDE / 编辑器
+.idea/
+.vscode/
+.trae/
+*.iml
+*.swp
+*.swo
+
+# 构建产物
 node_modules/
 miniprogram_npm/
+build/
+dist/
 *.log
+
+# 系统文件
 .DS_Store
+Thumbs.db
+
+# 本地配置（含个人 AppID 等敏感信息）
+project.private.config.json

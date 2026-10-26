@@ -1,0 +1,36 @@
+<view class="login-page">
+	<view class="login-header">
+		<text class="title">校园报修</text>
+		<text class="subtitle">账号登录</text>
+	</view>
+
+	<view class="form-box">
+		<view class="form-item">
+			<text class="label">账号</text>
+			<input class="input" value="{{account}}" placeholder="请输入账号"
+				placeholder-class="input-placeholder" bindinput="onAccountInput" />
+		</view>
+		<view class="form-item border-bottom">
+			<text class="label">密码</text>
+			<input class="input" value="{{password}}" password placeholder="请输入密码"
+				placeholder-class="input-placeholder" bindinput="onPasswordInput" />
+		</view>
+	</view>
+
+	<view class="btn-box">
+		<van-button type="primary" block loading="{{loading}}" bind:click="onLogin">登 录</van-button>
+	</view>
+
+	<view class="wechat-box">
+		<text class="wechat-link" bindtap="onWechatLogin">微信一键登录</text>
+	</view>
+
+	<view class="tips">
+		<text class="tips-title">演示账号（点击可快速填充）</text>
+		<text class="tips-item" data-account="admin" bindtap="fillAccount">超级管理员：admin / 123456</text>
+		<text class="tips-item" data-account="luogang" bindtap="fillAccount">维修人员：luogang / 123456</text>
+		<text class="tips-item" data-account="heshifu" bindtap="fillAccount">维修人员：heshifu / 123456</text>
+		<text class="tips-item" data-account="wlx" bindtap="fillAccount">普通用户：wlx / 123456</text>
+		<text class="tips-item" data-account="pyk" bindtap="fillAccount">普通用户：pyk / 123456</text>
+	</view>
+</view>

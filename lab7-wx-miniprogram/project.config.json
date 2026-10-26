@@ -28,9 +28,16 @@
     "packNpmRelationList": [],
     "minifyWXSS": true,
     "showES6CompileOption": false,
-    "scopeDataCheck": false
+    "scopeDataCheck": false,
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false
   },
-  "appid": "wx7273f8f3dff4386d",
+  "appid": "wx1e7b52dcebde8b0f",
   "projectname": "%E5%AE%BF%E8%88%8D%E6%8A%A5%E4%BF%AE%E5%8A%A9%E6%89%8B",
   "libVersion": "2.18.0",
   "simulatorType": "wechat",
@@ -82,5 +89,11 @@
         }
       ]
     }
-  }
+  },
+  "compileType": "miniprogram",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {}
 }

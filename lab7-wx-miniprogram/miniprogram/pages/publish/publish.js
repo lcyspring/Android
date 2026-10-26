@@ -145,11 +145,41 @@ Page({
         faultType: this.data.faultType,
         images: fileIds,
         status: '未处理',
+        rejectReason: '',
+        workerName: '',
+        workerPhone: '',
+        repairRecords: [],
         createTime: moment('YYYY-MM-DD hh:mm:ss'),
       });
 
       wx.hideLoading();
       wx.showToast({ title: '提交成功', duration: 1000 });
+
+      // 同步写入本地 my_repairs 缓存（任务书要求：本地数据保存）
+      const myRecord = {
+        _id: 'my_' + Date.now(),
+        name: this.data.name.trim(),
+        floor: this.data.floor,
+        dorm: this.data.dorm,
+        phone: this.data.phone,
+        desc: this.data.desc.trim(),
+        level: this.data.level,
+        levelIcon: this.data.levelIcon,
+        location: this.data.location,
+        faultType: this.data.faultType,
+        images: fileIds,
+        status: '未处理',
+        rejectReason: '',
+        workerName: '',
+        workerPhone: '',
+        repairRecords: [],
+        createTime: moment('YYYY-MM-DD hh:mm:ss'),
+      };
+      try {
+        const mine = wx.getStorageSync('my_repairs') || [];
+        mine.unshift(myRecord);
+        wx.setStorageSync('my_repairs', mine);
+      } catch (e) { console.warn('[publish] 写入 my_repairs 失败:', e); }
 
       // 3. 给管理员发送订阅消息（失败不影响主流程）
       const admin = wx.getStorageSync('admin');

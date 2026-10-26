@@ -37,6 +37,11 @@ const COLLECTION = {
   share: 'c_share'    // 分享配置
 };
 
+// 本地兜底开关（实验七新增）
+// true：云能力不可用或调用失败时，自动回退到 wx.storage 本地数据，保证无云环境也能演示
+// false：仅使用云开发，调用失败即抛错（适合有完整云环境的正式部署）
+const USE_MOCK_FALLBACK = true;
+
 // 业务常量
 const BIZ = {
   // 报修位置分类
@@ -54,5 +59,6 @@ export {
   AD_UNIT,
   CLOUD_FUNCTION,
   COLLECTION,
-  BIZ
+  BIZ,
+  USE_MOCK_FALLBACK
 };
