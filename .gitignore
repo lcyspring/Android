@@ -95,6 +95,16 @@ lint/tmp/
 .DS_Store
 Thumbs.db
 
+# Office / IDE temp & lock files
+~$*
+*.tmp
+
+# Kotlin daemon sessions
+.kotlin/
+
+# Node modules (webrtc experiment)
+node_modules/
+
 # Gradle local build cache
 .gradle/*/buildOutputCleanup/*.bin
 .gradle/*/buildOutputCleanup/*.lock

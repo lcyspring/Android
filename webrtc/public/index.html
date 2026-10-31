@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>实验六 - WebRTC 实时通信</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>WebRTC 实时通信实验</h1>
+    <p id="status">未连接</p>
+  </header>
+
+  <main>
+    <div class="video-container">
+      <div class="video-box">
+        <h3>本地视频 (Local)</h3>
+        <video id="localVideo" autoplay muted playsinline></video>
+      </div>
+      <div class="video-box">
+        <h3>远端视频 (Remote)</h3>
+        <video id="remoteVideo" autoplay playsinline></video>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="getMediaBtn" class="btn primary">获取媒体</button>
+      <button id="callBtn" class="btn" disabled>发起呼叫</button>
+      <button id="hangupBtn" class="btn danger" disabled>挂断</button>
+    </div>
+
+    <div class="log-container">
+      <h3>信令日志 (Signaling Log)</h3>
+      <div id="log"></div>
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!-- pages/detail/detail.wxml -->
+<view class="container">
+  <!-- 加载态 -->
+  <view wx:if="{{isLoading}}" class="loading">
+    <text>加载详情...</text>
+  </view>
+
+  <!-- 错误态 -->
+  <view wx:elif="{{error}}" class="error-box">
+    <text class="error-text">{{error}}</text>
+    <view class="retry-btn" bindtap="onRetry">重试</view>
+  </view>
+
+  <!-- 详情态 -->
+  <block wx:elif="{{todo}}">
+    <view class="detail-card">
+      <view class="detail-header">
+        <view class="check {{todo.completed ? 'checked' : ''}}">
+          <text wx:if="{{todo.completed}}">✓</text>
+        </view>
+        <view class="status-tag {{todo.completed ? 'done' : 'pending'}}">
+          {{todo.completed ? '已完成' : '未完成'}}
+        </view>
+      </view>
+
+      <view class="detail-title">{{todo.title}}</view>
+
+      <view class="detail-meta">
+        <view class="meta-item">
+          <text class="meta-label">ID</text>
+          <text class="meta-value">{{todo.id}}</text>
+        </view>
+        <view class="meta-item">
+          <text class="meta-label">用户 ID</text>
+          <text class="meta-value">{{todo.userId}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="back-tip">点击左上角返回列表</view>
+  </block>
+</view>

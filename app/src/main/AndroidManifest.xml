@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
 
+    <!-- 实验 4：网络请求权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 实验 4：相机运行时权限（危险权限，需要动态申请） -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
